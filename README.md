@@ -6,4 +6,6 @@ Análisis usando los datos de
 
 ## Notas
 
-- **2020-06-08**: Hoy el formato de fecha a cambiado de "DD/MM/YYYY" a "YYYY-MM-DD"
+- **2020-06-08**:
+  - Hoy el formato de fecha a cambiado de "DD/MM/YYYY" a "YYYY-MM-DD"
+  - Los CSV ahora se guardarán comprimidos para no llegar a los límites de github

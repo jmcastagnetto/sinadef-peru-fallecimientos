@@ -1,7 +1,7 @@
 library(tidyverse)
 
 sinadef_raw <- read_csv2(
-  "datos/fallecidos_sinadef-utf8.csv",
+  "datos/fallecidos_sinadef-utf8.csv.gz",
   skip = 2,
   col_types = cols(
     Nº = col_integer(),
@@ -87,7 +87,7 @@ sinadef_df <- sinadef_raw %>%
 
 write_csv(
   sinadef_df,
-  path = "datos/fallecidos_sinadef_procesado.csv"
+  path = "datos/fallecidos_sinadef_procesado.csv.gz"
 )
 
 save(
