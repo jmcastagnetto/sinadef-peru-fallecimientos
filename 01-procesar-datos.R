@@ -31,7 +31,7 @@ sinadef_raw <- read_csv2(
 
 estciv_mayores <- c("CASADO", "DIVORCIADO", "SEPARADO",
                     "VIUDO", "CONVIVIENT/CONCUBINA")
-edu_mayores <- c("INICIAL / PRE-ESCOLAR",
+edu_mayor3 <- c("INICIAL / PRE-ESCOLAR",
                  "PRIMARIA INCOMPLETA",
                  "PRIMARIA COMPLETA",
                  "SECUNDARIA INCOMPLETA",
@@ -55,10 +55,14 @@ sinadef_df <- sinadef_raw %>%
   mutate( # intento de corregir errores en la unidad de la edad
     tiempo_edad_orig = tiempo_edad,
     tiempo_edad = case_when(
-      tiempo_edad_orig != "AÑOS" &
+      !is.na(edad) &
+        edad >= 15 &
+        tiempo_edad_orig != "AÑOS" &
         estado_civil %in% estciv_mayores ~ "AÑOS",
+      !is.na(edad) &
+        edad >= 3 &
       tiempo_edad_orig != "AÑOS" &
-        nivel_de_instruccion %in% edu_mayores ~ "AÑOS",
+        nivel_de_instruccion %in% edu_mayor3 ~ "AÑOS",
       TRUE ~ tiempo_edad
     ),
     corregido_tiempo_edad = (tiempo_edad != tiempo_edad_orig),
