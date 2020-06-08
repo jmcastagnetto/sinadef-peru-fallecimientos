@@ -16,7 +16,7 @@ sinadef_raw <- read_csv2(
     `DEPARTAMENTO DOMICILIO` = col_character(),
     `PROVINCIA DOMICILIO` = col_character(),
     `DISTRITO DOMICILIO` = col_character(),
-    FECHA = col_date(format = "%d/%m/%Y"),
+    FECHA = col_date(),
     AÑO = col_integer(),
     MES = col_integer(),
     `TIPO LUGAR` = col_character(),
@@ -26,7 +26,8 @@ sinadef_raw <- read_csv2(
   ),
   na = c("", "SIN REGISTRO", "NA")
 ) %>%
-  janitor::clean_names()
+  janitor::clean_names() %>%
+  select(1:19)
 
 estciv_mayores <- c("CASADO", "DIVORCIADO", "SEPARADO",
                     "VIUDO", "CONVIVIENT/CONCUBINA")
@@ -83,6 +84,11 @@ sinadef_df <- sinadef_raw %>%
          necropsia),
     factor
   )
+
+write_csv(
+  sinadef_df,
+  path = "datos/fallecidos_sinadef_procesado.csv"
+)
 
 save(
   sinadef_raw,
