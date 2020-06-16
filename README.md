@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/270383647.svg)](https://zenodo.org/badge/latestdoi/270383647)
 
-**Última actualización**: 2020-06-16 21:48:43 UTC
+**Última actualización**: 2020-06-16 22:02:58 UTC
 
 Fallecimientos en Perú (SINADEF)
 ================================
@@ -20,11 +20,11 @@ Notas
     -   Los CSV ahora se guardarán comprimidos para no llegar a los
         límites de github
 -   **2020-06-16**:
-    -   Con la adición de campos de causas, estoy calculando campos que
-        marcan si las causas contienen la expresión regular:
-        `"(CORONAVIRUS|COVID|SARS COV|SARS-COV)"` se encuentra presente,
-        y marcar como posible registro de fallecimiento debido a
-        COVID-19.
+    -   Con la adición de seis (6) campos de causas, estoy calculando
+        campos que marcan si las causas contienen la expresión regular:
+        `"(CORONAVIRUS|COVID|SARS COV|SARS-COV)"`, y si se encuentra
+        presente en al menos uno, marcarlo como posible registro de
+        fallecimiento debido a COVID-19.
 
 Gráfico de fallecimientos por día desde marzo 2020
 --------------------------------------------------
