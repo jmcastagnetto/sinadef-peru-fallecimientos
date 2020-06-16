@@ -5,3 +5,5 @@ iconv -f ISO_8859-1  -t UTF8 datos/fallecidos_sinadef.csv > datos/fallecidos_sin
 gzip -9f datos/fallecidos*csv
 
 Rscript 01-procesar-datos.R
+
+Rscript build-readme.R
