@@ -1,4 +1,6 @@
-**Última actualización**: 2020-06-16 21:45:06 UTC
+[![DOI](https://zenodo.org/badge/270383647.svg)](https://zenodo.org/badge/latestdoi/270383647)
+
+**Última actualización**: 2020-06-16 21:46:39 UTC
 
 Fallecimientos en Perú (SINADEF)
 ================================
