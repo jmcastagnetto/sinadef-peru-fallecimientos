@@ -29,7 +29,7 @@ Análisis usando los datos de
 
 De los registros del SINADEF, se han empleado los 6 campos que contienen posibles causas del deceso, y se empleó la expresión regular `(CORONAVIRUS|COVID|SARS COV|SARS-COV)` para encontrar aquellas causas que pudieran ser por COVID-19. Luego, se marcaron los registros con al menos un campo que correspondía a la expresión regular mencioanada.
 
-```{r}
+```{r echo=FALSE}
 desdeMarzo <- sinadef_df %>% 
   filter(anho == 2020 & mes >= 3) %>% 
   group_by(fecha, covid19_causa) %>% 
@@ -73,7 +73,7 @@ ggsave(
 ```
 ![Fallecimientos por día desde Marzo del 2020](plots/fallecimientos-por-dia.png)
 
-```{r}
+```{r echo=FALSE}
 tmp <- Sys.setlocale("LC_TIME", "es_PE.utf8")
 p2 <- ggplot(desdeMarzo, aes(x = fecha, y = csum, 
                        group = causa_lbl, fill = causa_lbl)) +
