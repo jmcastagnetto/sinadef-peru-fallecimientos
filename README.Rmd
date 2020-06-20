@@ -44,6 +44,17 @@ desdeMarzo <- sinadef_df %>%
     csum = cumsum(n),
     causa_lbl = if_else(covid19_causa, "Posible COVID-19", "Otras causas")
   )
+```
+
+Estimados:
+
+- Fechas de registro: del `r min(sinadef_df$fecha, na.rm = TRUE)` al `r max(sinadef_df$fecha, na.rm = TRUE)`
+- Número de registros : `r nrow(sinadef_df)`
+- Probables registros por COVID-19 desde Marzo 2020: `r sum(sinadef_df$covid19_causa, na.rm = TRUE)`
+- Fallecimientos por otras causas: `r sum(!sinadef_df$covid19_causa, na.rm = TRUE)`
+
+
+```{r echo=FALSE}
 tmp <- Sys.setlocale("LC_TIME", "es_PE.utf8")
 p1 <- ggplot(desdeMarzo, aes(x = fecha, y = n, 
                        group = causa_lbl, fill = causa_lbl)) +
