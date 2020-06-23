@@ -30,6 +30,9 @@ Análisis usando los datos de
 - **2020-06-22**:
   - Hoy los datos abiertos no presentan nada de la información anterior, como referencia futura, lo datos se pueden ver en [datos/20200622-fallecidos_sinadef.csv.gz]("datos/20200622-fallecidos_sinadef.csv.gz")
 
+- **2020-06-23**:
+  - Hoy los datos abiertos regresaron al formato anterior, con todo los campos con causas.
+
 ## Gráfico de fallecimientos por día desde marzo 2020
 
 De los registros del SINADEF, se han empleado los 6 campos que contienen posibles causas del deceso, y se empleó la expresión regular `(CORONAVIRUS|COVID|SARS COV|SARS-COV)` para encontrar aquellas causas que pudieran ser por COVID-19. 
