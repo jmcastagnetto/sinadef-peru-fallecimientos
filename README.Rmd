@@ -27,6 +27,8 @@ Análisis usando los datos de
 - **2020-06-16**:
   - Con la adición de seis (6) campos de causas, estoy calculando campos que marcan si las causas contienen la expresión regular: `"(CORONAVIRUS|COVID|SARS COV|SARS-COV)"`, y si se encuentra presente en al menos uno, marcarlo como posible registro de fallecimiento debido a COVID-19.
 
+- **2020-06-22**:
+  - Hoy los datos abiertos no presentan nada de la información anterior, como referencia futura, lo datos se pueden ver en [datos/20200622-fallecidos_sinadef.csv.gz]("datos/20200622-fallecidos_sinadef.csv.gz")
 
 ## Gráfico de fallecimientos por día desde marzo 2020
 

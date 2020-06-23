@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/270383647.svg)](https://zenodo.org/badge/latestdoi/270383647)
 
-**Última actualización**: 2020-06-21 23:20:54 UTC
+**Última actualización**: 2020-06-23 01:09:37 UTC
 
 Fallecimientos en Perú (SINADEF)
 ================================
@@ -25,6 +25,10 @@ Notas
         `"(CORONAVIRUS|COVID|SARS COV|SARS-COV)"`, y si se encuentra
         presente en al menos uno, marcarlo como posible registro de
         fallecimiento debido a COVID-19.
+-   **2020-06-22**:
+    -   Hoy los datos abiertos no presentan nada de la información
+        anterior, como referencia futura, lo datos se pueden ver en
+        [datos/20200622-fallecidos\_sinadef.csv.gz](%22datos/20200622-fallecidos_sinadef.csv.gz%22)
 
 Gráfico de fallecimientos por día desde marzo 2020
 --------------------------------------------------
