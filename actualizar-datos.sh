@@ -4,6 +4,6 @@ wget https://cloud.minsa.gob.pe/s/nqF2irNbFomCLaa/download -O datos/fallecidos_s
 iconv -f ISO_8859-1  -t UTF8 datos/fallecidos_sinadef.csv > datos/fallecidos_sinadef-utf8.csv
 gzip -9f datos/fallecidos*csv
 
-#Rscript 01-procesar-datos.R
+Rscript 01-procesar-datos.R
 
-#Rscript build-readme.R
+Rscript build-readme.R
