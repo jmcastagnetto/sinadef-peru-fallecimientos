@@ -1,47 +1,28 @@
 library(tidyverse)
+library(vroom)
 
+
+
+# forma condesada
 col_spec <- cols(
+  .default = col_character(),
   Nº = col_double(),
-  `TIPO SEGURO` = col_character(),
-  SEXO = col_character(),
   EDAD = col_double(),
-  `TIEMPO EDAD` = col_character(),
-  `ESTADO CIVIL` = col_character(),
-  `NIVEL DE INSTRUCCIÓN` = col_character(),
-  `COD# UBIGEO DOMICILIO` = col_character(),
-  `PAIS DOMICILIO` = col_character(),
-  `DEPARTAMENTO DOMICILIO` = col_character(),
-  `PROVINCIA DOMICILIO` = col_character(),
-  `DISTRITO DOMICILIO` = col_character(),
   FECHA = col_date(format = ""),
-  AÑO = col_double(),
-  MES = col_double(),
-  `TIPO LUGAR` = col_character(),
-  INSTITUCION = col_character(),
-  `MUERTE VIOLENTA` = col_character(),
-  NECROPSIA = col_character(),
-  `DEBIDO A (CAUSA A)` = col_character(),
-  `CAUSA A (CIE-X)` = col_character(),
-  `DEBIDO A (CAUSA B)` = col_character(),
-  `CAUSA B (CIE-X)` = col_character(),
-  `DEBIDO A (CAUSA C)` = col_character(),
-  `CAUSA C (CIE-X)` = col_character(),
-  `DEBIDO A (CAUSA D)` = col_character(),
-  `CAUSA D (CIE-X)` = col_character(),
-  `DEBIDO A (CAUSA E)` = col_character(),
-  `CAUSA E (CIE-X)` = col_character(),
-  `DEBIDO A (CAUSA F)` = col_character(),
-  `CAUSA F (CIE-X)` = col_character()
+  AÑO = col_number(),
+  MES = col_number()
 )
 
-sinadef_raw <- read_csv2(
+sinadef_raw <- vroom(
   "datos/fallecidos_sinadef-utf8.csv.gz",
+  delim = ";",
   skip = 2,
   col_types = col_spec,
+  col_select = 1:31, # columnas 32-35 no tienen contenidos
+  trim_ws = TRUE,
   na = c("", "SIN REGISTRO", "NA")
 ) %>%
-  janitor::clean_names() %>%
-  select(-c(32:35))
+  janitor::clean_names()
 
 estciv_mayores <- c("CASADO", "DIVORCIADO", "SEPARADO",
                     "VIUDO", "CONVIVIENT/CONCUBINA")
@@ -54,6 +35,8 @@ edu_mayor3 <- c("INICIAL / PRE-ESCOLAR",
                  "SUPERIOR NO UNIV. COMP.",
                  "SUPERIOR UNIV. INC.",
                  "SUPERIOR UNIV. COMP.")
+
+covid19_regex <- "(CORONAVIRUS|COVID|SARS COV|SARS-COV|COBID|CORONA VI|CORONAB)"
 
 sinadef_df <- sinadef_raw %>%
   rename(
@@ -89,32 +72,37 @@ sinadef_df <- sinadef_raw %>%
       str_replace("estados unidos de america", "USA"),
     iso3c = countrycode::countryname(pais_en, destination = "iso3c")
   ) %>%
-  mutate_if(
-    is.character,
-    str_trim
-  ) %>%
-  mutate_if(
-    is.character,
-    str_squish
-  ) %>%
+#  mutate_if(
+#    is.character,
+#    str_remove_all,
+#	pattern = "\0"
+#  ) %>%
+#  mutate_if(
+#    is.character,
+#    str_trim
+#  ) %>%
+#  mutate_if(
+#    is.character,
+#    str_squish
+#  ) %>%
   mutate(
     covid19_a = str_detect(debido_a_causa_a,
-                          "(CORONAVIRUS|COVID|SARS COV|SARS-COV)") %>%
+                          covid19_regex) %>%
       replace_na(FALSE),
     covid19_b = str_detect(debido_a_causa_b,
-                          "(CORONAVIRUS|COVID|SARS COV|SARS-COV)") %>%
+                           covid19_regex) %>%
       replace_na(FALSE),
     covid19_c = str_detect(debido_a_causa_c,
-                          "(CORONAVIRUS|COVID|SARS COV|SARS-COV)") %>%
+                           covid19_regex) %>%
       replace_na(FALSE),
     covid19_d = str_detect(debido_a_causa_d,
-                          "(CORONAVIRUS|COVID|SARS COV|SARS-COV)") %>%
+                           covid19_regex) %>%
       replace_na(FALSE),
     covid19_e = str_detect(debido_a_causa_e,
-                          "(CORONAVIRUS|COVID|SARS COV|SARS-COV)") %>%
+                           covid19_regex) %>%
       replace_na(FALSE),
     covid19_f = str_detect(debido_a_causa_f,
-                          "(CORONAVIRUS|COVID|SARS COV|SARS-COV)") %>%
+                           covid19_regex) %>%
       replace_na(FALSE)
   ) %>%
   rowwise() %>%
@@ -124,15 +112,21 @@ sinadef_df <- sinadef_raw %>%
   )
 
 all_causes <- bind_rows(
-  sinadef_raw %>% select(codigo_ciex = causa_a_cie_x, causa = debido_a_causa_a),
-  sinadef_raw %>% select(codigo_ciex = causa_b_cie_x, causa = debido_a_causa_b),
-  sinadef_raw %>% select(codigo_ciex = causa_c_cie_x, causa = debido_a_causa_c),
-  sinadef_raw %>% select(codigo_ciex = causa_d_cie_x, causa = debido_a_causa_d),
-  sinadef_raw %>% select(codigo_ciex = causa_e_cie_x, causa = debido_a_causa_e),
-  sinadef_raw %>% select(codigo_ciex = causa_f_cie_x, causa = debido_a_causa_f)
+  sinadef_raw %>% select(codigo_ciex = causa_a_cie_x,
+                         causa = debido_a_causa_a),
+  sinadef_raw %>% select(codigo_ciex = causa_b_cie_x,
+                         causa = debido_a_causa_b),
+  sinadef_raw %>% select(codigo_ciex = causa_c_cie_x,
+                         causa = debido_a_causa_c),
+  sinadef_raw %>% select(codigo_ciex = causa_d_cie_x,
+                         causa = debido_a_causa_d),
+  sinadef_raw %>% select(codigo_ciex = causa_e_cie_x,
+                         causa = debido_a_causa_e),
+  sinadef_raw %>% select(codigo_ciex = causa_f_cie_x,
+                         causa = debido_a_causa_f)
 ) %>%
   arrange(codigo_ciex, causa) %>%
-  distinct()
+  group_by(codigo_ciex, causa)
 
 write_csv(
   all_causes,

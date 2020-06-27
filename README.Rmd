@@ -4,6 +4,7 @@ output: md_document
 
 ```{r include=FALSE, echo=FALSE}
 library(tidyverse)
+library(ggforce)
 load("datos/sinadef-datos.Rdata")
 hoy <- lubridate::now(tzone = "UTC")
 ```
@@ -40,6 +41,27 @@ De los registros del SINADEF, se han empleado los 6 campos que contienen posible
 Luego, se marcaron los registros con al menos un campo que correspondía a la expresión regular mencionada.
 
 ```{r echo=FALSE}
+desdeInicio <- sinadef_df %>% 
+  mutate(
+    year = lubridate::year(fecha),
+    isoweek = lubridate::isoweek(fecha)
+  ) %>% 
+  #filter(anho == 2020 & mes >= 3) %>% 
+  group_by(year, isoweek, covid19_causa) %>% 
+  summarise(
+    fecha = max(fecha),
+    n = n()
+  ) %>% 
+  group_by(covid19_causa) %>% 
+  mutate(
+    csum = cumsum(n),
+    causa_lbl = if_else(covid19_causa, "Posible COVID-19", "Otras causas") %>% 
+      factor(
+        levels = c("Posible COVID-19", "Otras causas"),
+        ordered = TRUE
+      )
+  )
+
 desdeMarzo <- sinadef_df %>% 
   filter(anho == 2020 & mes >= 3) %>% 
   group_by(fecha, covid19_causa) %>% 
@@ -47,8 +69,13 @@ desdeMarzo <- sinadef_df %>%
   group_by(covid19_causa) %>% 
   mutate(
     csum = cumsum(n),
-    causa_lbl = if_else(covid19_causa, "Posible COVID-19", "Otras causas")
+    causa_lbl = if_else(covid19_causa, "Posible COVID-19", "Otras causas") %>% 
+      factor(
+        levels = c("Posible COVID-19", "Otras causas"),
+        ordered = TRUE
+      )
   )
+
 ```
 
 Estimados:
@@ -61,45 +88,54 @@ Estimados:
 
 ```{r echo=FALSE}
 tmp <- Sys.setlocale("LC_TIME", "es_PE.utf8")
-p1 <- ggplot(desdeMarzo, aes(x = fecha, y = n, 
+min_fecha <- min(sinadef_df$fecha, na.rm = TRUE)
+p1 <- ggplot(desdeInicio, aes(x = fecha, y = n, 
                        group = causa_lbl, fill = causa_lbl)) +
   geom_area() +
   geom_vline(xintercept = as.Date("2020-03-06")) +
-  annotate("segment", x = as.Date("2020-03-13"), y = 1.2*max(desdeMarzo$n),
-           xend = as.Date("2020-03-07"), yend = 0.9*max(desdeMarzo$n),
-           arrow = arrow(length = unit(.25, "cm"), type = "closed")) +
-  annotate("label", x = as.Date("2020-03-07"), y = 1.2*max(desdeMarzo$n),
-           label = "Primer caso reportado", hjust = 0) +
+  annotate("segment", x = as.Date("2020-02-15"), 
+           y = 1.2*max(desdeInicio$n),
+           xend = as.Date("2020-03-06"), 
+           yend = 0.9*max(desdeInicio$n),
+           arrow = arrow(length = unit(.25, "cm"), 
+                         type = "closed")) +
+  annotate("label", x = as.Date("2020-02-20"), 
+           y = 1.2*max(desdeInicio$n),
+           label = "Primer\ncaso\nreportado", hjust = 1) +
   scale_fill_brewer(name = "Causas", type = "qual") +
   labs(
     y = "",
     x = "Decesos",
-    title = "Fallecimientos diarios desde Marzo del 2020",
+    title = paste0("Fallecimientos por semana desde ", min_fecha),
     subtitle = paste0("Fuente: Datos abiertos de SINADEF, MINSA (al ",
                       hoy, " UTC)"),
     caption = "@jmcastagnetto, Jesus M. Castagnetto"
   ) +
-  theme_minimal() +
+  theme_light() +
   theme(
     legend.position = "bottom",
     plot.caption = element_text(family = "Inconsolata"),
     plot.margin = unit(rep(1, 4), "cm")
-  )
+  ) + 
+  facet_zoom(xlim = c(as.Date("2020-03-01"),
+                      max(desdeInicio$fecha)))
+
 ggsave(
   plot = p1,
-  filename = "plots/fallecimientos-por-dia.png",
+  filename = "plots/fallecimientos-por-semana.png",
   width = 8,
-  height = 6
+  height = 7
 )
 ```
-![Fallecimientos por día desde Marzo del 2020](plots/fallecimientos-por-dia.png)
+![Fallecimientos por semana](plots/fallecimientos-por-semana.png)
 
 ## Gráfico de fallecimientos acumulados desde marzo 2020
 
 
 ```{r echo=FALSE}
 tmp <- Sys.setlocale("LC_TIME", "es_PE.utf8")
-p2 <- ggplot(desdeMarzo, aes(x = fecha, y = csum, 
+p2 <- ggplot(desdeMarzo, 
+             aes(x = fecha, y = csum, 
                        group = causa_lbl, fill = causa_lbl)) +
   geom_area() +
   geom_vline(xintercept = as.Date("2020-03-06")) +
