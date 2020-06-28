@@ -5,7 +5,7 @@ output: md_document
 ```{r include=FALSE, echo=FALSE}
 library(tidyverse)
 library(ggforce)
-load("datos/sinadef-datos.Rdata")
+sinadef_df <- readRDS("datos/sinadef-procesado.rds")
 hoy <- lubridate::now(tzone = "UTC")
 ```
 

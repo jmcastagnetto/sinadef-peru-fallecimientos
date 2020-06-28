@@ -1,8 +1,6 @@
 library(tidyverse)
 library(vroom)
 
-
-
 # forma condesada
 col_spec <- cols(
   .default = col_character(),
@@ -38,6 +36,14 @@ edu_mayor3 <- c("INICIAL / PRE-ESCOLAR",
 
 covid19_regex <- "(CORONAVIRUS|COVID|SARS COV|SARS-COV|COBID|CORONA VI|CORONAB)"
 
+# para convertir a edades en años
+s2m <- 60
+m2h <- 60
+h2d <- 24
+d2y <- 365
+m2y <- 12
+
+
 sinadef_df <- sinadef_raw %>%
   rename(
     id = 1,
@@ -63,28 +69,32 @@ sinadef_df <- sinadef_raw %>%
       TRUE ~ tiempo_edad
     ),
     corregido_tiempo_edad = (tiempo_edad != tiempo_edad_orig),
+    # años
+    edad_anhos = case_when(
+      tiempo_edad == "SEGUNDOS" ~ edad / (s2m * m2h * h2d * d2y),
+      tiempo_edad == "MINUTOS" ~ edad / (m2h * h2d * d2y),
+      tiempo_edad == "HORAS" ~ edad / (h2d * d2y),
+      tiempo_edad == "DIAS" ~ edad / d2y,
+      tiempo_edad == "MESES" ~ edad / m2y,
+      TRUE ~ edad
+    ),
+    # age group
+    grupo_edad = cut(edad_anhos,
+                     breaks = seq(0, 160, by = 20),
+                     right = FALSE,
+                     ordered_result = TRUE),
     # calcular campos extra
-    dia = lubridate::day(fecha),
+    dia = lubridate::wday(fecha,
+                          locale = "es_PE.UTF8",
+                          label = TRUE, abbr = FALSE),
     semana = lubridate::week(fecha),
     semana_iso = lubridate::isoweek(fecha),
+    trimestre = lubridate::quarter(fecha),
     pais_en = simplecountries::simple_country_name(pais_domicilio) %>%
       str_replace("gran bretaña", "UK") %>%
       str_replace("estados unidos de america", "USA"),
     iso3c = countrycode::countryname(pais_en, destination = "iso3c")
   ) %>%
-#  mutate_if(
-#    is.character,
-#    str_remove_all,
-#	pattern = "\0"
-#  ) %>%
-#  mutate_if(
-#    is.character,
-#    str_trim
-#  ) %>%
-#  mutate_if(
-#    is.character,
-#    str_squish
-#  ) %>%
   mutate(
     covid19_a = str_detect(debido_a_causa_a,
                           covid19_regex) %>%
@@ -109,7 +119,7 @@ sinadef_df <- sinadef_raw %>%
   mutate(
     covid19_causa = (covid19_a | covid19_b | covid19_c | covid19_d | covid19_e | covid19_f),
     covid19_n_causa = sum(covid19_a, covid19_b, covid19_c, covid19_d, covid19_e, covid19_f, na.rm = TRUE)
-  )
+  ) 
 
 all_causes <- bind_rows(
   sinadef_raw %>% select(codigo_ciex = causa_a_cie_x,
@@ -138,9 +148,5 @@ write_csv(
   path = "datos/fallecidos_sinadef_procesado.csv.gz"
 )
 
-save(
-  sinadef_raw,
-  sinadef_df,
-  file = "datos/sinadef-datos.Rdata"
-)
-
+saveRDS(sinadef_raw, "datos/sinadef-raw.rds")
+saveRDS(sinadef_df, "datos/sinadef-procesado.rds")
