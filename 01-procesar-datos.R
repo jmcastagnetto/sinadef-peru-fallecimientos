@@ -136,7 +136,11 @@ all_causes <- bind_rows(
                          causa = debido_a_causa_f)
 ) %>%
   arrange(codigo_ciex, causa) %>%
-  group_by(codigo_ciex, causa)
+  group_by(codigo_ciex, causa) %>%
+  tally() %>%
+  mutate(
+    causa = str_trim(causa) %>% str_squish()
+  )
 
 write_csv(
   all_causes,
