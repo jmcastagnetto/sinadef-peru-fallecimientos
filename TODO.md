@@ -1,1 +1,0 @@
-- [X] usar `vroom` en lugar de `readr` para mejorar la perfomance de lectura del CSV
