@@ -8,6 +8,7 @@ sha1sum --status -c sha1sum-orig.txt
 if [ $? -eq 0 ]
 then
 	echo "Datos no han cambiado"
+	rm datos/fallecidos_sinadef.csv
 else
 	echo "Datos originales han cambiado... "
 	sha1sum datos/fallecidos_sinadef.csv > sha1sum-orig.txt
