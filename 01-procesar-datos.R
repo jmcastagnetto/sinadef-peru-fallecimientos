@@ -144,12 +144,12 @@ all_causes <- bind_rows(
 
 write_csv(
   all_causes,
-  path = "datos/causas_reportadas_sinadef.csv"
+  file = "datos/causas_reportadas_sinadef.csv"
 )
 
 write_csv(
   sinadef_df,
-  path = "datos/fallecidos_sinadef_procesado.csv.gz"
+  file = "datos/fallecidos_sinadef_procesado.csv.gz"
 )
 
 saveRDS(sinadef_raw, "datos/sinadef-raw.rds")
