@@ -1,1 +1,1 @@
-9e4d627fab43a18fcdbf929b134beacbaf59933f  datos/fallecidos_sinadef.csv
+948eec3580cb401d2e72340ec79bb45f2498b5b6  datos/fallecidos_sinadef.csv
