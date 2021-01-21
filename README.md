@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/270383647.svg)](https://zenodo.org/badge/latestdoi/270383647)
 
-**Última actualización**: 2021-01-14 04:58:09 UTC
+**Última actualización**: 2021-01-21 14:01:44 UTC
 
 Fallecimientos en Perú (SINADEF)
 ================================
@@ -44,14 +44,14 @@ que pudieran ser por COVID-19.
 Luego, se marcaron los registros con al menos un campo que correspondía
 a la expresión regular mencionada.
 
-    ## `summarise()` regrouping output by 'year', 'isoweek' (override with `.groups` argument)
+    ## `summarise()` has grouped output by 'year', 'isoweek'. You can override using the `.groups` argument.
 
 Estimados:
 
--   Fechas de registro: del 2017-01-01 al 2021-01-12
--   Número de registros : 544634
--   Probables registros por COVID-19 desde Marzo 2020: 82231
--   Fallecimientos por otras causas: 462403
+-   Fechas de registro: del 2017-01-01 al 2021-01-19
+-   Número de registros : 549467
+-   Probables registros por COVID-19 desde Marzo 2020: 84223
+-   Fallecimientos por otras causas: 465244
 
 ![Fallecimientos por semana](plots/fallecimientos-por-semana.png)
 
