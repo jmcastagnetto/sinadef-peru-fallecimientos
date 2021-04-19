@@ -80,7 +80,15 @@ sinadef_df <- sinadef_raw %>%
     ),
     # age group
     grupo_edad = cut(edad_anhos,
-                     breaks = seq(0, 160, by = 20),
+                     breaks = c(0, 20, 40, 60, 80, 200),
+					 labels = c(
+					   "0-19",
+					   "20-39",
+					   "40-59",
+					   "60-79",
+					   "80+"
+					 ),
+					 include.lowest = TRUE,
                      right = FALSE,
                      ordered_result = TRUE),
     # calcular campos extra
@@ -89,11 +97,14 @@ sinadef_df <- sinadef_raw %>%
                           label = TRUE, abbr = FALSE),
     semana = lubridate::week(fecha),
     semana_iso = lubridate::isoweek(fecha),
+	semana_epi = lubridate::epiweek(fecha),
+	anho_epi = lubridate::epiyear(fecha),
     trimestre = lubridate::quarter(fecha),
     pais_en = simplecountries::simple_country_name(pais_domicilio) %>%
       str_replace("gran bretaña", "UK") %>%
       str_replace("estados unidos de america", "USA"),
-    iso3c = countrycode::countryname(pais_en, destination = "iso3c")
+    iso3c = countrycode::countryname(pais_en, destination = "iso3c"),
+	en_peru = (iso3c == "PER")
   ) %>%
   mutate(
     covid19_a = str_detect(debido_a_causa_a,
