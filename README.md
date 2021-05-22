@@ -1,9 +1,8 @@
 [![DOI](https://zenodo.org/badge/270383647.svg)](https://zenodo.org/badge/latestdoi/270383647)
 
-**Última actualización**: 2021-05-19 22:27:30 UTC
+**Última actualización**: 2021-05-22 04:01:56 UTC
 
-Fallecimientos en Perú (SINADEF)
-================================
+# Fallecimientos en Perú (SINADEF)
 
 Análisis usando los datos de
 
@@ -11,8 +10,7 @@ Análisis usando los datos de
 Defunciones - SINADEF - \[Ministerio de
 Salud\]”](https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos-del-sistema-inform%C3%A1tico-nacional-de-defunciones-sinadef-ministerio)
 
-Notas
------
+## Notas
 
 -   **2020-06-08**:
     -   Hoy el formato de fecha a cambiado de “DD/MM/YYYY” a
@@ -33,8 +31,7 @@ Notas
     -   Hoy los datos abiertos regresaron al formato anterior, con todo
         los campos con causas.
 
-Gráfico de fallecimientos por día desde marzo 2020
---------------------------------------------------
+## Gráfico de fallecimientos por día desde marzo 2020
 
 De los registros del SINADEF, se han empleado los 6 campos que contienen
 posibles causas del deceso, y se empleó la expresión regular
@@ -48,15 +45,14 @@ a la expresión regular mencionada.
 
 Estimados:
 
--   Fechas de registro: del 2017-01-01 al 2021-05-19
--   Número de registros : 676500
--   Probables registros por COVID-19 desde Marzo 2020: 156106
--   Fallecimientos por otras causas: 520394
+-   Fechas de registro: del 2017-01-01 al 2021-05-21
+-   Número de registros : 678411
+-   Probables registros por COVID-19 desde Marzo 2020: 157090
+-   Fallecimientos por otras causas: 521321
 
 ![Fallecimientos por semana](plots/fallecimientos-por-semana.png)
 
-Gráfico de fallecimientos acumulados desde marzo 2020
------------------------------------------------------
+## Gráfico de fallecimientos acumulados desde marzo 2020
 
 ![Fallecimientos acumulados desde Marzo del
 2020](plots/fallecimientos-acumulados.png)
