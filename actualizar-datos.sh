@@ -18,7 +18,7 @@ then
 else
 	echo "Datos originales han cambiado... "
 	echo $curr_size > sinadef-size.txt
-    curl --insecure https://cloud.minsa.gob.pe/s/nqF2irNbFomCLaa/download --output datos/fallecidos_sinadef.csv
+    curl --silent --insecure https://cloud.minsa.gob.pe/s/nqF2irNbFomCLaa/download --output datos/fallecidos_sinadef.csv
 	now=`date -I`
 	#sha1sum datos/fallecidos_sinadef.csv > sha1sum-orig.txt
 	iconv -f ISO_8859-1  -t UTF8 datos/fallecidos_sinadef.csv | tr -d '\000' > datos/fallecidos_sinadef-utf8.csv
