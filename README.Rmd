@@ -34,6 +34,9 @@ Análisis usando los datos de
 - **2020-06-23**:
   - Hoy los datos abiertos regresaron al formato anterior, con todo los campos con causas.
 
+- **2021-06-03**:
+  - Cambiando compresión a usar `xz` en lugar de `gzip`
+
 ## Gráfico de fallecimientos por día desde marzo 2020
 
 De los registros del SINADEF, se han empleado los 6 campos que contienen posibles causas del deceso, y se empleó la expresión regular `(CORONAVIRUS|COVID|SARS COV|SARS-COV)` para encontrar aquellas causas que pudieran ser por COVID-19. 
@@ -42,12 +45,13 @@ Luego, se marcaron los registros con al menos un campo que correspondía a la ex
 
 ```{r echo=FALSE}
 desdeInicio <- sinadef_df %>% 
-  mutate(
-    year = lubridate::year(fecha),
-    isoweek = lubridate::isoweek(fecha)
-  ) %>% 
-  #filter(anho == 2020 & mes >= 3) %>% 
-  group_by(year, isoweek, covid19_causa) %>% 
+  # mutate(
+  #   year = lubridate::year(fecha),
+  #   isoweek = lubridate::isoweek(fecha)
+  # ) %>% 
+  #filter(año == 2020 & mes >= 3) %>% 
+  #group_by(year, semana_epi, covid19_causa) %>% 
+  group_by(año_epi, semana_epi, covid19_causa) %>% 
   summarise(
     fecha = max(fecha),
     n = n()
@@ -63,7 +67,7 @@ desdeInicio <- sinadef_df %>%
   )
 
 desdeMarzo <- sinadef_df %>% 
-  filter(anho == 2020 & mes >= 3) %>% 
+  filter(año == 2020 & mes >= 3) %>% 
   group_by(fecha, covid19_causa) %>% 
   tally() %>% 
   group_by(covid19_causa) %>% 

@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/270383647.svg)](https://zenodo.org/badge/latestdoi/270383647)
 
-**Última actualización**: 2021-06-03 02:01:49 UTC
+**Última actualización**: 2021-06-03 16:34:39 UTC
 
 # Fallecimientos en Perú (SINADEF)
 
@@ -30,6 +30,8 @@ Salud\]”](https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-falleci
 -   **2020-06-23**:
     -   Hoy los datos abiertos regresaron al formato anterior, con todo
         los campos con causas.
+-   **2021-06-03**:
+    -   Cambiando compresión a usar `xz` en lugar de `gzip`
 
 ## Gráfico de fallecimientos por día desde marzo 2020
 
@@ -41,14 +43,14 @@ que pudieran ser por COVID-19.
 Luego, se marcaron los registros con al menos un campo que correspondía
 a la expresión regular mencionada.
 
-    ## `summarise()` has grouped output by 'year', 'isoweek'. You can override using the `.groups` argument.
+    ## `summarise()` has grouped output by 'año_epi', 'semana_epi'. You can override using the `.groups` argument.
 
 Estimados:
 
--   Fechas de registro: del 2017-01-01 al 2021-06-01
--   Número de registros : 687312
--   Probables registros por COVID-19 desde Marzo 2020: 161384
--   Fallecimientos por otras causas: 525928
+-   Fechas de registro: del 2017-01-01 al 2021-06-02
+-   Número de registros : 688242
+-   Probables registros por COVID-19 desde Marzo 2020: 161788
+-   Fallecimientos por otras causas: 526454
 
 ![Fallecimientos por semana](plots/fallecimientos-por-semana.png)
 

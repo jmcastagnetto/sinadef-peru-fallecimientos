@@ -6,17 +6,18 @@ col_spec <- cols(
   .default = col_character(),
   Nº = col_double(),
   EDAD = col_double(),
-  FECHA = col_date(format = ""),
+  FECHA = col_date(format = "%d/%m/%Y"),
   AÑO = col_number(),
   MES = col_number()
 )
 
 sinadef_raw <- vroom(
-  "datos/fallecidos_sinadef-utf8.csv.gz",
+  "datos/fallecidos_sinadef.csv",
   delim = ";",
-  skip = 2,
+ # skip = 2,
   col_types = col_spec,
-  col_select = 1:31, # columnas 32-35 no tienen contenidos
+  #n_max = 1000,
+  #col_select = 1:31, # columnas 32-35 no tienen contenidos
   trim_ws = TRUE,
   na = c("", "SIN REGISTRO", "NA")
 ) %>%
@@ -43,11 +44,10 @@ h2d <- 24
 d2y <- 365
 m2y <- 12
 
-
 sinadef_df <- sinadef_raw %>%
   rename(
     id = 1,
-    anho = ano
+    año = ano
   ) %>%
   separate(
     col = cod_number_ubigeo_domicilio,
@@ -70,7 +70,7 @@ sinadef_df <- sinadef_raw %>%
     ),
     corregido_tiempo_edad = (tiempo_edad != tiempo_edad_orig),
     # años
-    edad_anhos = case_when(
+    edad_años = case_when(
       tiempo_edad == "SEGUNDOS" ~ edad / (s2m * m2h * h2d * d2y),
       tiempo_edad == "MINUTOS" ~ edad / (m2h * h2d * d2y),
       tiempo_edad == "HORAS" ~ edad / (h2d * d2y),
@@ -79,7 +79,7 @@ sinadef_df <- sinadef_raw %>%
       TRUE ~ edad
     ),
     # age group
-    grupo_edad = cut(edad_anhos,
+    grupo_edad = cut(edad_años,
                      breaks = c(0, 20, 40, 60, 80, 200),
 					 labels = c(
 					   "0-19",
@@ -97,14 +97,14 @@ sinadef_df <- sinadef_raw %>%
                           label = TRUE, abbr = FALSE),
     semana = lubridate::week(fecha),
     semana_iso = lubridate::isoweek(fecha),
-	semana_epi = lubridate::epiweek(fecha),
-	anho_epi = lubridate::epiyear(fecha),
+	  semana_epi = lubridate::epiweek(fecha),
+  	año_epi = lubridate::epiyear(fecha),
     trimestre = lubridate::quarter(fecha),
     pais_en = simplecountries::simple_country_name(pais_domicilio) %>%
       str_replace("gran bretaña", "UK") %>%
       str_replace("estados unidos de america", "USA"),
     iso3c = countrycode::countryname(pais_en, destination = "iso3c"),
-	en_peru = (iso3c == "PER")
+  	en_peru = (iso3c == "PER")
   ) %>%
   mutate(
     covid19_a = str_detect(debido_a_causa_a,
@@ -130,7 +130,17 @@ sinadef_df <- sinadef_raw %>%
   mutate(
     covid19_causa = (covid19_a | covid19_b | covid19_c | covid19_d | covid19_e | covid19_f),
     covid19_n_causa = sum(covid19_a, covid19_b, covid19_c, covid19_d, covid19_e, covid19_f, na.rm = TRUE)
-  ) 
+  )
+
+write_csv(
+  sinadef_df,
+  file = "datos/fallecidos_sinadef_procesado.csv"
+)
+
+
+saveRDS(sinadef_raw, "datos/sinadef-raw.rds")
+saveRDS(sinadef_df, "datos/sinadef-procesado.rds")
+
 
 all_causes <- bind_rows(
   sinadef_raw %>% select(codigo_ciex = causa_a_cie_x,
@@ -158,10 +168,3 @@ write_csv(
   file = "datos/causas_reportadas_sinadef.csv"
 )
 
-write_csv(
-  sinadef_df,
-  file = "datos/fallecidos_sinadef_procesado.csv.gz"
-)
-
-saveRDS(sinadef_raw, "datos/sinadef-raw.rds")
-saveRDS(sinadef_df, "datos/sinadef-procesado.rds")
