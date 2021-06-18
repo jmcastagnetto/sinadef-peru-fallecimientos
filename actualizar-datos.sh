@@ -22,9 +22,5 @@ else
 	now=`date -I`
 	#sha1sum datos/fallecidos_sinadef.csv > sha1sum-orig.txt
 	#iconv -f ISO_8859-1  -t UTF8 datos/fallecidos_sinadef.csv | tr -d '\000' > datos/fallecidos_sinadef-utf8.csv
-	Rscript 01-procesar-datos.R
-	Rscript build-readme.R
-	xz -T 3 -9e -f datos/fallecidos*csv
-	git commit -a -m "Actualizado el $now"
-	HOME=/home/jesus git push origin main
+	(Rscript 01-procesar-datos.R && Rscript build-readme.R) && (xz -T 3 -9e -f datos/fallecidos*csv; git commit -a -m "Actualizado el $now"; HOME=/home/jesus git push origin main)
 fi
