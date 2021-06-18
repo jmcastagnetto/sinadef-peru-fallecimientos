@@ -6,18 +6,14 @@ col_spec <- cols(
   .default = col_character(),
   Nº = col_double(),
   EDAD = col_double(),
-  FECHA = col_date(format = "%d/%m/%Y"),
+  FECHA = col_date(),
   AÑO = col_number(),
   MES = col_number()
 )
 
 sinadef_raw <- vroom(
   "datos/fallecidos_sinadef.csv",
-  delim = ";",
- # skip = 2,
   col_types = col_spec,
-  #n_max = 1000,
-  #col_select = 1:31, # columnas 32-35 no tienen contenidos
   trim_ws = TRUE,
   na = c("", "SIN REGISTRO", "NA")
 ) %>%
