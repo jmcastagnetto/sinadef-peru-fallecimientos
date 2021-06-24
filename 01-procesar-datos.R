@@ -96,7 +96,9 @@ sinadef_df <- sinadef_raw %>%
 	  semana_epi = lubridate::epiweek(fecha),
   	año_epi = lubridate::epiyear(fecha),
     trimestre = lubridate::quarter(fecha),
-    pais_en = simplecountries::simple_country_name(pais_domicilio) %>%
+    pais_en = str_trim(pais_domicilio) %>%
+	  str_squish() %>%
+	  simplecountries::simple_country_name() %>%
       str_replace("gran bretaña", "UK") %>%
       str_replace("estados unidos de america", "USA"),
     iso3c = countrycode::countryname(pais_en, destination = "iso3c"),
