@@ -40,6 +40,20 @@ h2d <- 24
 d2y <- 365
 m2y <- 12
 
+
+country_name_map <- c(
+  "^republica checa$" = "Czech Republic",
+  "^filipinas$" = "Philippines",
+  "^peru$" = "Peru",
+  "^gran bretaña$" = "UK",
+  "^estados unidos de america$" = "USA",
+  "^china, republica popular$" = "China",
+  "^luxemburgo, gran ducado de$" = "Luxembourg",
+  "^trinidad tobago$" = "Trinidad and Tobago",
+  "^eslovenia$" = "Slovenia",
+  "^republica de cabo verde$" = "Cape Verde"
+)
+
 sinadef_df <- sinadef_raw %>%
   rename(
     id = 1,
@@ -97,10 +111,9 @@ sinadef_df <- sinadef_raw %>%
   	año_epi = lubridate::epiyear(fecha),
     trimestre = lubridate::quarter(fecha),
     pais_en = str_trim(pais_domicilio) %>%
-	  str_squish() %>%
-	  simplecountries::simple_country_name() %>%
-      str_replace("gran bretaña", "UK") %>%
-      str_replace("estados unidos de america", "USA"),
+  	  str_squish() %>%
+      simplecountries::simple_country_name() %>%
+      str_replace_all(country_name_map),
     iso3c = countrycode::countryname(pais_en, destination = "iso3c"),
   	en_peru = (iso3c == "PER")
   ) %>%
@@ -135,10 +148,8 @@ write_csv(
   file = "datos/fallecidos_sinadef_procesado.csv"
 )
 
-
 saveRDS(sinadef_raw, "datos/sinadef-raw.rds")
 saveRDS(sinadef_df, "datos/sinadef-procesado.rds")
-
 
 all_causes <- bind_rows(
   sinadef_raw %>% select(codigo_ciex = causa_a_cie_x,
