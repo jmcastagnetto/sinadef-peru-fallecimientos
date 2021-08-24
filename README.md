@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/270383647.svg)](https://zenodo.org/badge/latestdoi/270383647)
 
-**Última actualización**: 2021-08-24 15:31:31 UTC
+**Última actualización**: 2021-08-24 15:36:38 UTC
 
 # Fallecimientos en Perú (SINADEF)
 
@@ -8,7 +8,9 @@ Análisis usando los datos de: [“SINADEF: Certificado
 Defunciones”](https://www.datosabiertos.gob.pe/dataset/sinadef-certificado-defunciones)
 
 *Atención*: hasta antes del 2021-08-24, usaba los datos de [“Información
-de Fallecidos del Sistema Informático Nacional de Defunciones - SINADEF - Ministerio de Salud”](https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos-del-sistema-inform%C3%A1tico-nacional-de-defunciones-sinadef-ministerio),
+de Fallecidos del Sistema Informático Nacional de Defunciones SINADEF
+Ministerio de
+Salud”](https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos-del-sistema-inform%C3%A1tico-nacional-de-defunciones-sinadef-ministerio),
 los cuales no parecen estar siendo actualizados en la actualidad.
 
 ## Notas
@@ -46,8 +48,6 @@ que pudieran ser por COVID-19.
 
 Luego, se marcaron los registros con al menos un campo que correspondía
 a la expresión regular mencionada.
-
-    ## `summarise()` has grouped output by 'año_epi', 'semana_epi'. You can override using the `.groups` argument.
 
 Estimados:
 

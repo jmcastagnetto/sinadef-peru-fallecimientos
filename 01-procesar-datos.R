@@ -1,3 +1,5 @@
+options(tidyverse.quiet = TRUE)
+options(dplyr.summarise.inform = FALSE)
 library(tidyverse)
 library(vroom)
 library(archive)

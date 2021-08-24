@@ -3,6 +3,8 @@ output: md_document
 ---
 
 ```{r include=FALSE, echo=FALSE}
+options(tidyverse.quiet = TRUE)
+options(dplyr.summarise.inform = FALSE)
 library(tidyverse)
 library(ggforce)
 sinadef_df <- readRDS("datos/sinadef-procesado.rds")
