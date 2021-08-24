@@ -1,23 +1,32 @@
 library(tidyverse)
 library(vroom)
+library(archive)
 
-# forma condesada
-col_spec <- cols(
+csv_file <- archive_read(
+  archive = "datos/fallecidos_sinadef.7z",
+  file = "TB_SINADEF.csv",
+  mode = "r",
+  format = "7zip"
+)
+
+csv_spec <- cols(
   .default = col_character(),
-  Nº = col_double(),
-  EDAD = col_double(),
-  FECHA = col_date(),
+  EDAD = col_number(),
   AÑO = col_number(),
   MES = col_number()
 )
 
 sinadef_raw <- vroom(
-  "datos/fallecidos_sinadef.csv",
-  col_types = col_spec,
+  csv_file,
+  col_types = csv_spec,
   trim_ws = TRUE,
   na = c("", "SIN REGISTRO", "NA")
 ) %>%
-  janitor::clean_names()
+  janitor::clean_names() %>%
+  rename(año = ano) %>%
+  mutate(
+    fecha = lubridate::dmy(fecha)
+  )
 
 estciv_mayores <- c("CASADO", "DIVORCIADO", "SEPARADO",
                     "VIUDO", "CONVIVIENT/CONCUBINA")
@@ -40,32 +49,16 @@ h2d <- 24
 d2y <- 365
 m2y <- 12
 
-
-country_name_map <- c(
-  "^republica checa$" = "Czech Republic",
-  "^filipinas$" = "Philippines",
-  "^peru$" = "Peru",
-  "^gran bretaña$" = "UK",
-  "^estados unidos de america$" = "USA",
-  "^china, republica popular$" = "China",
-  "^luxemburgo, gran ducado de$" = "Luxembourg",
-  "^trinidad tobago$" = "Trinidad and Tobago",
-  "^eslovenia$" = "Slovenia",
-  "^republica de cabo verde$" = "Cape Verde"
-)
-
 sinadef_df <- sinadef_raw %>%
-  rename(
-    id = 1,
-    año = ano
-  ) %>%
   separate(
     col = cod_number_ubigeo_domicilio,
     into = c("cod", "number", "dept", "prov", "dist", "domicilio"),
     sep = "-",
     convert = FALSE
   ) %>%
-  mutate( # intento de corregir errores en la unidad de la edad
+  mutate(
+    ubigeo_reniec = glue::glue("{dept}{prov}{dist}"),
+    # intento de corregir errores en la unidad de la edad
     tiempo_edad_orig = tiempo_edad,
     tiempo_edad = case_when(
       !is.na(edad) &
@@ -112,8 +105,14 @@ sinadef_df <- sinadef_raw %>%
     trimestre = lubridate::quarter(fecha),
     pais_en = str_trim(pais_domicilio) %>%
   	  str_squish() %>%
-      simplecountries::simple_country_name() %>%
-      str_replace_all(country_name_map),
+      str_to_title() %>%
+      str_replace_all(" De ", " de ") %>%
+      str_replace_all(" E ", " e ") %>%
+      str_replace("Republica", "República") %>%
+      str_replace("^Gran Bretaña$", "Reino Unido") %>%
+      str_replace("^Reino Unido de Gran Bretaña e Irlanda Del Norte", "Reino Unido") %>%
+      str_replace("^Estados Unidos de America$", "Estados Unidos") %>%
+      countrycode::countryname(destination = "country.name.en"),
     iso3c = countrycode::countryname(pais_en, destination = "iso3c"),
   	en_peru = (iso3c == "PER")
   ) %>%
@@ -143,8 +142,9 @@ sinadef_df <- sinadef_raw %>%
     covid19_n_causa = sum(covid19_a, covid19_b, covid19_c, covid19_d, covid19_e, covid19_f, na.rm = TRUE)
   )
 
-write_csv(
+vroom_write(
   sinadef_df,
+  delim = ",",
   file = "datos/fallecidos_sinadef_procesado.csv"
 )
 
