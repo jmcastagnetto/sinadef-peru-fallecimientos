@@ -1,6 +1,6 @@
 [![DOI](https://zenodo.org/badge/270383647.svg)](https://zenodo.org/badge/latestdoi/270383647)
 
-**Última actualización**: 2021-10-22 07:02:10 UTC
+**Última actualización**: 2021-10-23 07:02:06 UTC
 
 # Fallecimientos en Perú (SINADEF)
 
@@ -51,10 +51,10 @@ a la expresión regular mencionada.
 
 Estimados:
 
--   Fechas de registro: del 2017-01-01 al 2021-10-20
--   Número de registros : 756123
--   Probables registros por COVID-19 desde Marzo 2020: 173901
--   Fallecimientos por otras causas: 582222
+-   Fechas de registro: del 2017-01-01 al 2021-10-21
+-   Número de registros : 756532
+-   Probables registros por COVID-19 desde Marzo 2020: 173923
+-   Fallecimientos por otras causas: 582609
 
 ![Fallecimientos por semana](plots/fallecimientos-por-semana.png)
 
