@@ -12,6 +12,7 @@ hoy <- lubridate::now(tzone = "UTC")
 ```
 
 [![DOI](https://zenodo.org/badge/270383647.svg)](https://zenodo.org/badge/latestdoi/270383647)
+[![License](https://img.shields.io/github/license/jmcastagnetto/sinadef-peru-fallecimientos)](LICENSE)
 
 **Última actualización**: `r hoy` UTC
 
