@@ -1,6 +1,7 @@
 [![DOI](https://zenodo.org/badge/270383647.svg)](https://zenodo.org/badge/latestdoi/270383647)
+[![License](https://img.shields.io/github/license/jmcastagnetto/sinadef-peru-fallecimientos)](LICENSE)
 
-**Última actualización**: 2022-01-23 07:02:42 UTC
+**Última actualización**: 2022-01-24 06:55:08 UTC
 
 # Fallecimientos en Perú (SINADEF)
 
