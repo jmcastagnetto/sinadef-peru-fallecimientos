@@ -38,6 +38,6 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# targets
+# targets objects, metadata, etc.
 _targets
 _targets/**
