@@ -4,7 +4,7 @@ options(dplyr.summarise.inform = FALSE)
 source("R/functions.R")
 
 tar_option_set(
-  packages = c("tidyverse", "vroom", "archive")
+  packages = c("tidyverse", "vroom", "archive", "git2r", "httr")
 )
 
 list(
@@ -47,5 +47,12 @@ list(
   tar_target(
     update_readme,
     build_readme(sinadef_proc)
+  ),
+  tar_target(
+    update_repo,
+    commit_push(
+      c(update_readme, sinadef_proc),
+      glue::glue("Datos actualizados al {Sys.Date()}")
+    )
   )
 )

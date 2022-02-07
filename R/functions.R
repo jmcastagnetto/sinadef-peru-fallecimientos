@@ -1,5 +1,6 @@
 library(tidyverse)
 library(httr)
+library(git2r)
 
 data_url <- "https://cloud.minsa.gob.pe/s/g9KdDRtek42X3pg/download"
 
@@ -195,4 +196,9 @@ build_readme <- function(dummy) {
     output_format = "md_document",
     output_file = "README.md"
   )
+}
+
+commit_push <- function(dummy, msg) {
+  commit(message = msg, all = TRUE)
+  push()
 }
