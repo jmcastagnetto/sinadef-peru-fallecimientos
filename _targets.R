@@ -1,4 +1,5 @@
 library(targets)
+library(tarchetypes)
 options(tidyverse.quiet = TRUE)
 options(dplyr.summarise.inform = FALSE)
 source("R/functions.R")
@@ -10,7 +11,11 @@ tar_option_set(
 list(
   tar_target(
     downloaded_data,
-    get_file()
+    get_file(),
+    cue = tar_cue_age(  # downloaded data is older than 6 hours
+      name = downloaded_data,
+      age = as.difftime(6, units = "hours")
+    )
   ),
   tar_target(
     csv_file,
@@ -59,7 +64,7 @@ list(
         generate_csv,
         generate_raw_rds,
       ),
-      glue::glue("Datos actualizados al {Sys.Date()}")
+      glue::glue("Datos actualizados al {Sys.time()}")
     )
   )
 )
