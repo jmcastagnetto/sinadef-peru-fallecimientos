@@ -51,7 +51,14 @@ list(
   tar_target(
     update_repo,
     commit_push(
-      c(update_readme, sinadef_proc),
+      c(
+        update_readme,
+        sinadef_proc,
+        save_all_causes,
+        generate_proc_rds,
+        generate_csv,
+        generate_raw_rds,
+      ),
       glue::glue("Datos actualizados al {Sys.Date()}")
     )
   )

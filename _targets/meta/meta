@@ -19,13 +19,4 @@ commit_push|function|22485c53ef1ae0cd||||||||||||||
 save_rds|function|6a5a59d982745384||||||||||||||
 get_csv_file|function|74bf0c32caa79343||||||||||||||
 get_file|function|56184254c6191a09||||||||||||||
-build_readme|function|9f4993389708863d
-data_url|object|4f4b3ecbae4c535d
-mk_causes|function|eef9e019b438ca6b
-fix_clean_data|function|5f9a798d36fcdc29
-read_sinadef_raw|function|eef658e45b1c9531
-save_csv|function|3753c27daeba97fa
-commit_push|function|22485c53ef1ae0cd
-save_rds|function|6a5a59d982745384
-get_csv_file|function|74bf0c32caa79343
-get_file|function|56184254c6191a09
+update_repo|stem||36204ef64593da09|67c13901bee3d21a|-786861498||t19030.9481743418s||0|rds|vector|||0.833||Error in git2r_push unsupported URL protocol
