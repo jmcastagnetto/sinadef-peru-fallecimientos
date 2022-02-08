@@ -19,7 +19,7 @@ list(
   ),
   tar_target(
     csv_file,
-    get_csv_file(downloaded_data)
+    get_csv_file(downloaded_data),
   ),
   tar_target(
     sinadef_raw,
