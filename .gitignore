@@ -41,6 +41,7 @@ vignettes/*.pdf
 # targets objects, metadata, etc.
 _targets
 _targets/**
+!_targets/meta/meta
 
 # local script
 update-data.sh
