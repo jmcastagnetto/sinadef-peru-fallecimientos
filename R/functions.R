@@ -1,11 +1,31 @@
 library(tidyverse)
 library(httr)
-library(git2r)
+library(git2r, warn.conflicts = FALSE)
 
 data_url <- "https://cloud.minsa.gob.pe/s/g9KdDRtek42X3pg/download"
 
-get_file <- function(url = data_url) {
-  download.file(url, destfile = "datos/fallecidos_sinadef.7z")
+detect_change <- function(url = data_url) {
+  prev_length <- read_lines("prev_length.txt") %>% as.integer()
+  res <- HEAD(url)
+  curr_length <- res$headers$`content-length`
+  write_file(curr_length, "prev_length.txt")
+  data_changed <- (as.integer(curr_length) != prev_length)
+  if(data_changed) {
+    cat(">> Change detected\n")
+  } else {
+    cat(">> Data has not changed\n")
+  }
+  return(data_changed)
+}
+
+
+get_file <- function(url = data_url, has_changed) {
+  if(has_changed) {
+    cat(">> Downloading data\n")
+    download.file(url, destfile = "datos/fallecidos_sinadef.7z")
+  } else {
+    cat(">> No need to download data\n")
+  }
   return("datos/fallecidos_sinadef.7z")
 }
 

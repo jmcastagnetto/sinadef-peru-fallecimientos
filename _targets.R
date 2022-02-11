@@ -10,12 +10,17 @@ tar_option_set(
 
 list(
   tar_target(
+    check_for_change,
+    detect_change(data_url)
+  ),
+  tar_target(
     downloaded_data,
-    get_file(),
-    cue = tar_cue_age(  # downloaded data is older than 6 hours
-      name = downloaded_data,
-      age = as.difftime(6, units = "hours")
-    )
+    get_file(data_url, check_for_change)
+    #,
+    #cue = tar_cue_age(  # downloaded data is older than 6 hours
+    #  name = downloaded_data,
+    #  age = as.difftime(6, units = "hours")
+    #)
   ),
   tar_target(
     csv_file,
