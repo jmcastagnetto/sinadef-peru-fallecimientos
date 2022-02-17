@@ -45,3 +45,4 @@ _targets/**
 
 # local script
 update-data.sh
+_flag_.txt
