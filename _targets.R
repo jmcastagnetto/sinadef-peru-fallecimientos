@@ -58,19 +58,19 @@ list(
   tar_target(
     update_readme,
     build_readme(sinadef_proc)
-  ),
-  tar_target(
-    update_repo,
-    commit_push(
-      c(
-        update_readme,
-        sinadef_proc,
-        save_all_causes,
-        generate_proc_rds,
-        generate_csv,
-        generate_raw_rds,
-      ),
-      glue::glue("Datos actualizados al {Sys.time()}")
-    )
-  )
+  )#,
+  #tar_target(
+  #  update_repo,
+  #  commit_push(
+  #    c(
+  #      update_readme,
+  #      sinadef_proc,
+  #      save_all_causes,
+  #      generate_proc_rds,
+  #      generate_csv,
+  #      generate_raw_rds,
+  #    ),
+  #    glue::glue("Datos actualizados al {Sys.time()}")
+  #  )
+  #)
 )
