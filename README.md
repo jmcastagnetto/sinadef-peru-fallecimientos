@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/github/license/jmcastagnetto/sinadef-peru-fallecimientos)](LICENSE)
 
 -   **Repositorio creado el 2020-06-07 17:41:42 UTC**
--   **Última actualización**: 2022-02-16 22:53:46 UTC
+-   **Última actualización**: 2022-02-17 04:14:40 UTC
 
 # Fallecimientos en Perú (SINADEF)
 
@@ -40,6 +40,13 @@ los cuales no parecen estar siendo actualizados en la actualidad.
 -   **2021-08-24**:
     -   Cambiando la fuente de datos a los datos mas actualizados
         liberados durante la “Datatón 2021” del MINSA
+-   **2022-02-16**
+    -   La fuente “nueva” de datos, no se está actualizando desde el
+        2022-02-12 al menos (URL:
+        <https://www.datosabiertos.gob.pe/dataset/sinadef-certificado-defunciones>),
+        por lo que estoy revertiendo a usar la fuente “antigua”
+        (<https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos-del-sistema-inform%C3%A1tico-nacional-de-defunciones-sinadef-ministerio>)
+        que si parece tener datos hasta la fecha de hoy.
 
 ## Gráfico de fallecimientos por día desde marzo 2020
 
@@ -53,10 +60,10 @@ a la expresión regular mencionada.
 
 Estimados:
 
--   Fechas de registro: del 2017-01-01 al 2022-02-15
--   Número de registros : 827074
--   Probables registros por COVID-19 desde Marzo 2020: 183039
--   Fallecimientos por otras causas: 644035
+-   Fechas de registro: del 2017-01-01 al 2022-02-16
+-   Número de registros : 827698
+-   Probables registros por COVID-19 desde Marzo 2020: 183125
+-   Fallecimientos por otras causas: 644573
 
 ![Fallecimientos por semana](plots/fallecimientos-por-semana.png)
 

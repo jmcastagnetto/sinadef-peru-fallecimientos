@@ -2,7 +2,11 @@ library(tidyverse)
 library(httr)
 library(git2r, warn.conflicts = FALSE)
 
-data_url <- "https://cloud.minsa.gob.pe/s/g9KdDRtek42X3pg/download"
+# "new" URL that is not been updated since 2022-02-12
+# data_url <- "https://cloud.minsa.gob.pe/s/g9KdDRtek42X3pg/download"
+
+# "old" URL that seems to be updated as of 2022-02-16
+data_url <- "https://cloud.minsa.gob.pe/s/nqF2irNbFomCLaa/download"
 
 detect_change <- function(url = data_url) {
   prev_length <- read_lines("prev_length.txt") %>% as.integer()
@@ -22,20 +26,22 @@ detect_change <- function(url = data_url) {
 get_file <- function(url = data_url, has_changed) {
   if(has_changed) {
     cat(">> Downloading data\n")
-    download.file(url, destfile = "datos/fallecidos_sinadef.7z")
+    # format is now CSV
+    download.file(url, destfile = "datos/fallecidos_sinadef.csv", method = "wget")
   } else {
     cat(">> No need to download data\n")
   }
-  return("datos/fallecidos_sinadef.7z")
+  return("datos/fallecidos_sinadef.csv")
 }
 
 get_csv_file <- function(downloaded_data) {
-  archive_read(
-    archive = downloaded_data,
-    file = "TB_SINADEF.csv",
-    mode = "r",
-    format = "7zip"
-  )
+  # archive_read(
+  #   archive = downloaded_data,
+  #   file = "TB_SINADEF.csv",
+  #   mode = "r",
+  #   format = "7zip"
+  # )
+  return("datos/fallecidos_sinadef.csv")
 }
 
 read_sinadef_raw <- function(csv_file) {
@@ -43,19 +49,22 @@ read_sinadef_raw <- function(csv_file) {
     .default = col_character(),
     EDAD = col_number(),
     AÑO = col_number(),
-    MES = col_number()
+    MES = col_number(),
+    FECHA = col_date()
   )
   vroom(
     csv_file,
+    delim = "|",
     col_types = csv_spec,
     trim_ws = TRUE,
     na = c("", "SIN REGISTRO", "NA")
   ) %>%
     janitor::clean_names() %>%
-    rename(año = ano) %>%
-    mutate(
-      fecha = lubridate::dmy(fecha)
-    )
+    rename(año = ano)
+  # %>%
+  #   mutate(
+  #     fecha = lubridate::dmy(fecha)
+  #   )
 }
 
 fix_clean_data <- function(sinadef_raw) {

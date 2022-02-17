@@ -45,6 +45,9 @@ Análisis usando los datos de: ["SINADEF: Certificado Defunciones"](https://www.
 - **2021-08-24**:
   - Cambiando la fuente de datos a los datos mas actualizados liberados durante la "Datatón 2021" del MINSA
 
+- **2022-02-16**
+  - La fuente "nueva" de datos, no se está actualizando desde el 2022-02-12 al menos (URL: https://www.datosabiertos.gob.pe/dataset/sinadef-certificado-defunciones), por lo que estoy revertiendo a usar la fuente "antigua" (https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos-del-sistema-inform%C3%A1tico-nacional-de-defunciones-sinadef-ministerio) que si parece tener datos hasta la fecha de hoy.
+
 ## Gráfico de fallecimientos por día desde marzo 2020
 
 De los registros del SINADEF, se han empleado los 6 campos que contienen posibles causas del deceso, y se empleó la expresión regular `(CORONAVIRUS|COVID|SARS COV|SARS-COV)` para encontrar aquellas causas que pudieran ser por COVID-19. 

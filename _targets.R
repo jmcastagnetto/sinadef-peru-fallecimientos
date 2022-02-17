@@ -22,13 +22,14 @@ list(
     #  age = as.difftime(6, units = "hours")
     #)
   ),
-  tar_target(
-    csv_file,
-    get_csv_file(downloaded_data),
-  ),
+  # tar_target(
+  #   csv_file,
+  #   get_csv_file(downloaded_data),
+  # ),
   tar_target(
     sinadef_raw,
-    read_sinadef_raw(csv_file)
+    read_sinadef_raw(downloaded_data)
+    #read_sinadef_raw(csv_file)
   ),
   tar_target(
     sinadef_proc,
