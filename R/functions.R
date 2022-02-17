@@ -28,6 +28,7 @@ get_file <- function(url = data_url, has_changed) {
     cat(">> Downloading data\n")
     # format is now CSV
     download.file(url, destfile = "datos/fallecidos_sinadef.csv", method = "wget")
+    write_file("csv downloaded", "_flag_.txt")
   } else {
     cat(">> No need to download data\n")
   }
