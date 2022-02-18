@@ -1,6 +1,5 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|iteration|parent|children|seconds|warnings|error
 check_for_change|stem|da7a3dad7a31c553|840fd1fa5fcc85b9|bcd112a69a3ed879|1117398620||t19040.1719527812s|ac45463db19e2cbe|48|rds|vector|||0.978||
-downloaded_data|stem|4c0b8a7c6ef26c00|374196a36b76fe1b|0bee63c8e3647175|706367948||t19040.1726572219s|e655bbbdcbba1d63|81|rds|vector|||60.841||
 sinadef_raw|stem|e45923509f374668|ec3fe621beb7825a|18054f1806d880db|925487672||t19040.1729118965s|e3bc12f46fdf5d77|30222699|rds|vector|||0.972||
 generate_raw_rds|stem|4ac1eb883db90b0f|3a103bec462a6b58|90208a12b3402003|521963005||t19040.1731235621s|a1c456b03adbfbf8|44|rds|vector|||18.264||
 sinadef_proc|stem|e78a70bde31ff1dc|7aef13d76d1814e6|f44cb64b8532b7d8|1900821553||t19040.1739780949s|ad7ac24045eb4cfa|37481289|rds|vector|||50.516||
@@ -19,5 +18,6 @@ save_csv|function|3753c27daeba97fa||||||||||||||
 commit_push|function|22485c53ef1ae0cd||||||||||||||
 save_rds|function|6a5a59d982745384||||||||||||||
 get_csv_file|function|b22349ec033e4865||||||||||||||
-get_file|function|78883924a1e94bdd||||||||||||||
+get_file|function|7ec741a60fd58a55||||||||||||||
 detect_change|function|f881c8a1124aa37a||||||||||||||
+downloaded_data|stem|4c0b8a7c6ef26c00|374196a36b76fe1b|0a1921d626afc464|706367948||t19041.2924979854s|e655bbbdcbba1d63|81|rds|vector|||67.14||
