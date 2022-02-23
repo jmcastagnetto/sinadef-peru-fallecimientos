@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/github/license/jmcastagnetto/sinadef-peru-fallecimientos)](LICENSE)
 
 -   **Repositorio creado el 2020-06-07 17:41:42 UTC**
--   **Última actualización**: 2022-02-17 04:14:40 UTC
+-   **Última actualización**: 2022-02-23 15:02:09 UTC
 
 # Fallecimientos en Perú (SINADEF)
 
