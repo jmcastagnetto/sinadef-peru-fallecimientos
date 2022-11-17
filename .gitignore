@@ -43,6 +43,9 @@ _targets
 _targets/**
 !_targets/meta/meta
 
+# local copy of data
+datos/fallecidos_sinadef.7z
+
 # local script
 update-data.sh
 _flag_.txt
