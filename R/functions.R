@@ -1,12 +1,20 @@
 library(tidyverse)
 library(httr)
+library(curl)
 library(git2r, warn.conflicts = FALSE)
 
 # "new" URL that is not been updated since 2022-02-12
 # data_url <- "https://cloud.minsa.gob.pe/s/g9KdDRtek42X3pg/download"
 
 # "old" URL that seems to be updated as of 2022-02-16
-data_url <- "https://cloud.minsa.gob.pe/s/nqF2irNbFomCLaa/download"
+#data_url <- "https://cloud.minsa.gob.pe/s/nqF2irNbFomCLaa/download"
+
+data_url <- "https://drive.minsa.gob.pe/s/PigmdwnCGEdyqos/download"
+
+curl_extra <- c(
+  "User-Agent" = "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/81.0",
+  "Referer" = "https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos-del-sistema-inform%C3%A1tico-nacional-de-defunciones-sinadef-ministerio"
+)
 
 detect_change <- function(url = data_url) {
   prev_length <- read_lines("prev_length.txt") %>% as.integer()
@@ -27,7 +35,8 @@ get_file <- function(url = data_url, has_changed) {
   if(has_changed) {
     cat(">> Downloading data\n")
     # format is now CSV
-    download.file(url, destfile = "datos/fallecidos_sinadef.csv", method = "wget")
+    #download.file(url, destfile = "datos/fallecidos_sinadef.csv", method = "curl", extra = curl_extra)
+    curl_download(url, "datos/fallecidos_sinadef.csv") 
     write_file("csv downloaded", "_flag_.txt")
   } else {
     cat(">> No need to download data\n")

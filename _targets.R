@@ -9,10 +9,10 @@ tar_option_set(
 )
 
 list(
-  tar_target(
-    check_for_change,
-    detect_change(data_url)
-  ),
+#  tar_target(
+#    check_for_change,
+#    detect_change(data_url)
+#  ),
   tar_target(
     downloaded_data,
     get_file(data_url, check_for_change)
