@@ -11,11 +11,6 @@ library(git2r, warn.conflicts = FALSE)
 
 data_url <- "https://drive.minsa.gob.pe/s/PigmdwnCGEdyqos/download"
 
-curl_extra <- c(
-  "User-Agent" = "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/81.0",
-  "Referer" = "https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos-del-sistema-inform%C3%A1tico-nacional-de-defunciones-sinadef-ministerio"
-)
-
 detect_change <- function(url = data_url) {
   prev_length <- read_lines("prev_length.txt") %>% as.integer()
   res <- HEAD(url)
