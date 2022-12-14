@@ -1,22 +1,22 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-all_causes|stem|2eee4591467b9a0d|f39d69bd87f1f92a|d4f8949c8d4ed4d4|-256360733||t19335.2940589438s|99664772752f0091|2929985|rds|local|vector|||36.672||
+all_causes|stem|526ea96bfc8a0984|f39d69bd87f1f92a|7afea3a1e028398d|-256360733||t19340.2939433723s|6fe7de0b5844d693|2932819|rds|local|vector|||36.327||
 build_readme|function|9f4993389708863d|||||||||||||||
-check_for_change|stem|f396cfefa63e00e8|840fd1fa5fcc85b9|e3973371a92c8d8f|1117398620||t19335.2917413512s|6efc4bfe9d27bd5a|46|rds|local|vector|||1.214||
+check_for_change|stem|f396cfefa63e00e8|840fd1fa5fcc85b9|e3973371a92c8d8f|1117398620||t19340.2917373075s|6efc4bfe9d27bd5a|46|rds|local|vector|||0.838||
 commit_push|function|22485c53ef1ae0cd|||||||||||||||
 data_url|object|1aec1575153e7027|||||||||||||||
 detect_change|function|bd6c47361cfa49ce|||||||||||||||
-downloaded_data|stem|369733854348ba6b|374196a36b76fe1b|018793efd6647517|706367948||t19335.2921863049s|6281f79619f6778a|80|rds|local|vector|||38.39||
+downloaded_data|stem|369733854348ba6b|374196a36b76fe1b|018793efd6647517|706367948||t19340.2920693908s|6281f79619f6778a|80|rds|local|vector|||28.66||
 fix_clean_data|function|5f9a798d36fcdc29|||||||||||||||
-generate_csv|stem|a699b6d598aa8692|db92f9af1fec0dd1|d9e17350fd7e8de3|-1087671090||t19335.2962709346s|2a8cd6e6973b8918|43315164|rds|local|vector|||151.012||
-generate_proc_rds|stem|e0d1f2ac79fc7e12|15a51b61b16d09fc|795ee0c7b7dc0d5a|-215333169||t19335.2965009346s|44e327d1ee1978d7|43|rds|local|vector|||19.822||
-generate_raw_rds|stem|e0d1f2ac79fc7e12|3a103bec462a6b58|37de04d51dc304af|521963005||t19335.2926817216s|44e327d1ee1978d7|43|rds|local|vector|||20.72||
+generate_csv|stem|532ab9e04bc93ee5|db92f9af1fec0dd1|02351867aff3fbd8|-1087671090||t19340.2961886501s|c76f9a8acd2b99d0|43372760|rds|local|vector|||153.262||
+generate_proc_rds|stem|e0d1f2ac79fc7e12|15a51b61b16d09fc|b2b59ef289d917c4|-215333169||t19340.2964252242s|44e327d1ee1978d7|43|rds|local|vector|||20.411||
+generate_raw_rds|stem|e0d1f2ac79fc7e12|3a103bec462a6b58|314a202a2b60ba3a|521963005||t19340.2925908723s|44e327d1ee1978d7|43|rds|local|vector|||20.813||
 get_csv_file|function|b22349ec033e4865|||||||||||||||
 get_file|function|414e353f52f35114|||||||||||||||
 mk_causes|function|eef9e019b438ca6b|||||||||||||||
 read_sinadef_raw|function|8089e515966dcdd8|||||||||||||||
-save_all_causes|stem|2eee4591467b9a0d|82e05372b31e506a|153e57b39fedc5e4|278830222||t19335.2965115827s|99664772752f0091|2929985|rds|local|vector|||0.108||
+save_all_causes|stem|526ea96bfc8a0984|82e05372b31e506a|bd9c01e27f86c324|278830222||t19340.2964359186s|6fe7de0b5844d693|2932819|rds|local|vector|||0.109||
 save_csv|function|3753c27daeba97fa|||||||||||||||
 save_rds|function|6a5a59d982745384|||||||||||||||
-sinadef_proc|stem|a699b6d598aa8692|7aef13d76d1814e6|b1d95ad2f54a151b|1900821553||t19335.2936215364s|2a8cd6e6973b8918|43315164|rds|local|vector|||56.235|Some values were not matched unambiguously Antillas Holandesas, Corea Del Sur, República De, República de Malaui|
-sinadef_raw|stem|e21c9dcaaa7c6807|ec3fe621beb7825a|b9e78f66fe6d746b|925487672||t19335.2924417216s|16438d8036d27b33|34967804|rds|local|vector|||1.461||
-update_readme|stem|e813a96dda7ca3b8|ae867852124af6f7|d3b804ca633e5984|941412151||t19335.294294916s|bf0d8caacacad815|112|rds|local|vector|||20.378||
+sinadef_proc|stem|532ab9e04bc93ee5|7aef13d76d1814e6|52ed9538290741cf|1900821553||t19340.293510826s|c76f9a8acd2b99d0|43372760|rds|local|vector|||54.249|Some values were not matched unambiguously Antillas Holandesas, Corea Del Sur, República De, República de Malaui|
+sinadef_raw|stem|9d46ebc22360cb0d|ec3fe621beb7825a|b9e78f66fe6d746b|925487672||t19340.2923497149s|c1b27162a14d08ec|35008116|rds|local|vector|||1.609||
+update_readme|stem|e813a96dda7ca3b8|ae867852124af6f7|64727078dba8107a|941412151||t19340.2941780482s|bf0d8caacacad815|112|rds|local|vector|||20.266||
