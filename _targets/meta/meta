@@ -1,22 +1,22 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-all_causes|stem|08012add98cbf45e|f39d69bd87f1f92a|d423ffd177f606f5|-256360733||t19347.2941225908s|4bfb2a5bcb4a723a|2936360|rds|local|vector|||38.03||
+all_causes|stem|82adec8360a5528f|f39d69bd87f1f92a|eb233f7a5f6d097c|-256360733||t19395.5896184535s|332f7d763abbd570|2974347|rds|local|vector|||10.991||
 build_readme|function|9f4993389708863d|||||||||||||||
-check_for_change|stem|f396cfefa63e00e8|840fd1fa5fcc85b9|e3973371a92c8d8f|1117398620||t19347.2917423592s|6efc4bfe9d27bd5a|46|rds|local|vector|||1.047||
+check_for_change|stem|976b5984c138c56f|840fd1fa5fcc85b9|e3973371a92c8d8f|1117398620||t19395.5877817912s|ac45463db19e2cbe|48|rds|local|vector|||0.507||
 commit_push|function|22485c53ef1ae0cd|||||||||||||||
 data_url|object|1aec1575153e7027|||||||||||||||
 detect_change|function|bd6c47361cfa49ce|||||||||||||||
-downloaded_data|stem|369733854348ba6b|374196a36b76fe1b|018793efd6647517|706367948||t19347.2922138407s|6281f79619f6778a|80|rds|local|vector|||40.678||
+downloaded_data|stem|1e137e3dd9298d94|374196a36b76fe1b|fe63b4aad2a69eb4|706367948||t19395.587980587s|e655bbbdcbba1d63|81|rds|local|vector|||17.149||
 fix_clean_data|function|5f9a798d36fcdc29|||||||||||||||
-generate_csv|stem|ca9bf4de5d60e142|db92f9af1fec0dd1|8dabc36f582bc8b7|-1087671090||t19347.296405739s|5d7c0da5e6adaa7a|43447044|rds|local|vector|||156.596||
-generate_proc_rds|stem|e0d1f2ac79fc7e12|15a51b61b16d09fc|015e3b1855ecbddf|-215333169||t19347.2966445353s|44e327d1ee1978d7|43|rds|local|vector|||20.582||
-generate_raw_rds|stem|e0d1f2ac79fc7e12|3a103bec462a6b58|e11d46379350d6d5|521963005||t19347.2927239333s|44e327d1ee1978d7|43|rds|local|vector|||20.992||
+generate_csv|stem|eed7caf5d447061c|db92f9af1fec0dd1|dfce9caf8fd7b51b|-1087671090||t19395.5920179384s|6d8c9c85c89034a4|44256074|rds|local|vector|||166.36||
+generate_proc_rds|stem|3fe873ceaa51890e|15a51b61b16d09fc|7820d4486240ef93|-215333169||t19395.5922890026s|a1c456b03adbfbf8|44|rds|local|vector|||23.369||
+generate_raw_rds|stem|3fe873ceaa51890e|3a103bec462a6b58|d1475a8a2dbdc810|521963005||t19395.5885342894s|a1c456b03adbfbf8|44|rds|local|vector|||22.987||
 get_csv_file|function|b22349ec033e4865|||||||||||||||
 get_file|function|414e353f52f35114|||||||||||||||
 mk_causes|function|eef9e019b438ca6b|||||||||||||||
 read_sinadef_raw|function|8089e515966dcdd8|||||||||||||||
-save_all_causes|stem|08012add98cbf45e|82e05372b31e506a|254c29b66731ace5|278830222||t19347.2966598593s|4bfb2a5bcb4a723a|2936360|rds|local|vector|||0.156||
+save_all_causes|stem|82adec8360a5528f|82e05372b31e506a|6b4541803e51abbc|278830222||t19395.5923037248s|332f7d763abbd570|2974347|rds|local|vector|||0.079||
 save_csv|function|3753c27daeba97fa|||||||||||||||
 save_rds|function|6a5a59d982745384|||||||||||||||
-sinadef_proc|stem|ca9bf4de5d60e142|7aef13d76d1814e6|a875a74b2a202052|1900821553||t19347.2936728222s|5d7c0da5e6adaa7a|43447044|rds|local|vector|||55.656|Some values were not matched unambiguously Antillas Holandesas, Corea Del Sur, República De, República de Malaui|
-sinadef_raw|stem|a276e9128bfc39ff|ec3fe621beb7825a|b9e78f66fe6d746b|925487672||t19347.2924807389s|929204c014ebc407|35069696|rds|local|vector|||1.212||
-update_readme|stem|e813a96dda7ca3b8|ae867852124af6f7|8e0f22948bb95357|941412151||t19347.2943557852s|bf0d8caacacad815|112|rds|local|vector|||20.14||
+sinadef_proc|stem|eed7caf5d447061c|7aef13d76d1814e6|d2c2b2b767b1ee6a|1900821553||t19395.5894805835s|6d8c9c85c89034a4|44256074|rds|local|vector|||53.136|There was 1 warning in mutate.ℹ In argument pais_en  ...  ....Caused by warning in countrycode_convert Some values were not matched unambiguously Antillas Holandesas, Corea Del Sur, República De, Emiratos Arabes Unidos, República de Malaui|
+sinadef_raw|stem|4143ca25b595eb28|ec3fe621beb7825a|8d1c709cb44611c6|925487672||t19395.5882679011s|9cf399298b584a7b|35722349|rds|local|vector|||1.472||
+update_readme|stem|4b208b5ac559cbe2|ae867852124af6f7|bf68112db13c9ffe|941412151||t19395.5898204901s|e42ed4625f93f45f|114|rds|local|vector|||17.451||
